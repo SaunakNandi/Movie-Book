@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+::-webkit-scrollbar{
+    width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #181819;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6556CD;
+    border-radius: 10px;
+}
+
+*::-moz-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+  
+  /* Handle */
+  *::-moz-scrollbar-thumb {
+    background-color: #181819;
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  *::-moz-scrollbar-thumb:hover {
+    background: #6556CD;
+    border-radius: 10px;
+  }
+
+  select{
+    -webkit-animation: none;
+    -moz-appearance: none;
+    -ms-apperance:none;
+    outline: 0;
+    box-shadow: none;
+
+    border: 0 !important;
+    background: #2f2f32;
+    background-image: none;
+    flex:1;
+    padding: 0 0.5rem;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  select::-ms-expand{
+    display: none;
+  }
+  .select{
+    position: relative;
+    display: flex;
+    width: 20em;
+    height: 3em;
+    line-height: 3;
+    background: #27272a;
+    overflow: hidden;
+    border-radius: 0.25em;
+  }
+  .select::after{
+    content: "\25BC";
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: #313134;
+    cursor: pointer;
+    pointer-events: none;
+    transition: 0.2s all ease;
+  }
+  .select:hover::after{
+    color: #6556CD;
+  }

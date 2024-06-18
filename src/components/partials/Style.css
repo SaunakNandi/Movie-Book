@@ -1,0 +1,39 @@
+/* Base styles for the slide */
+.carousel-slide {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    
+  }
+  
+  /* Hidden state */
+  .carousel-hidden {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  
+  /* Visible state */
+  .carousel-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* Exiting to the left */
+  .carousel-exit-left {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  
+  /* Entering from the left */
+  .carousel-enter-left {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .carousel-exit-right {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  /* Entering from the right */
+  .carousel-enter-right {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
