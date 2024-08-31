@@ -4,12 +4,12 @@ import { motion } from 'framer-motion'
 import no_image from '../../assets/no_image.png'
 const HorizontalCards = ({trend,category}) => {
     const uniqueObjects = {};
-    console.log(trend)
+    // console.log(trend)
     trend.forEach(obj => {
         uniqueObjects[obj.id] = obj;
     });
     const uniqueArrayOfObjects = Object.values(uniqueObjects)
-    console.log(uniqueArrayOfObjects)
+    // console.log(uniqueArrayOfObjects)
 
     const cardVariants = {
         hidden: { opacity: 0, x: -100 },

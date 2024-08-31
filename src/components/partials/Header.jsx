@@ -19,8 +19,8 @@ const Header = ({wallpaper,set_page}) => {
       };
     const Slide_Right=()=>{
 
-        if(activeindex+1==wallpaper.length-1)
-            set_page()
+        if(activeindex+1==wallpaper.length-1) set_page()
+            
         setTransitionClass('carousel-exit-right');
         setTimeout(() => {
             setActiveIndex((activeindex+1) % wallpaper.length)
@@ -30,7 +30,7 @@ const Header = ({wallpaper,set_page}) => {
     
     // GetWallpaper();
     useEffect(()=>{
-        console.log("called")
+        // console.log("called")
         const intervalId=setInterval(() => {
             Slide_Right()
         }, 5000);

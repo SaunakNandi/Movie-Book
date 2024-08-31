@@ -9,7 +9,7 @@ const Trailer = () => {
     const navigate=useNavigate()
     const category=pathname.includes("movie")? "movie":"tv"
     const yt_video=useSelector(state=>state[category].info.videos)
-    console.log(yt_video)
+    // console.log(yt_video)
   return (
     <div className ="absolute top-0 left-0 z-[100] w-full h-full flex items-center  justify-center bg-[rgba(0,0,0,0.9)] overflow-hidden">
         <Link onClick={()=>navigate(-1)} 

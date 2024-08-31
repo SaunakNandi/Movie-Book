@@ -15,11 +15,12 @@ import Notfound from './components/NotFound'
 import TvSeasons from './components/TvSeasons'
 function App() {
 
-
-  // developer.themoviedb.org/reference/trending-all
   return (
     <>
+    {/* <h1 className=""></h1> */}
       <div className="bg-[#1d1d20] w-full h-full flex">
+        
+        
         <Routes>
           <Route path="/" element={<Home/>}></Route>
           <Route path="/trending" element={<Trending/>}></Route>
