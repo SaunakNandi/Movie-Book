@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { asyncloadtv, removetv } from '../store/actions/tvActions'
-import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { asyncloadtv } from '../store/actions/tvActions'
+import { Outlet } from 'react-router-dom'
 import HorizontalCards from './partials/HorizontalCards'
 import { Link } from 'react-router-dom'
 import Loading from './Loading'
-import no_image from '../assets/no_image.png'
+import { useParams,useNavigate, useLocation } from 'react-router-dom'
+import { removetv } from '../store/actions/tvActions'
+
+const no_image=React.lazy(()=>import('../assets/no_image.png'))
 
 const TvDetails = () => {
   const {pathname} =useLocation()
@@ -22,7 +25,7 @@ const TvDetails = () => {
       dispatch(removetv())
     }
   },[id])
-  console.log(info && info)
+  // console.log(info && info)
   return info?(
     <div className='w-full h-[160vh] px-[10%] relative overflow-y-auto'
     style={{background:`linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.3),rgba(0,0,0,.8)),url(https://image.tmdb.org/t/p/original/${info.detail.backdrop_path || info.detail.poster_path})`,

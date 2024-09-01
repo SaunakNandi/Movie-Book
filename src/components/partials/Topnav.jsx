@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "../../utils/axios";
-import no_image from "../../assets/no_image.png";
+
+const no_image=React.lazy(()=>import("../../assets/no_image.png"))
 
 const Topnav = () => {
   const [query, setQuery] = useState("");
@@ -21,10 +22,10 @@ const Topnav = () => {
   }, [query]);
   return (
     <div className="w-[80%] h-[10vh] relative flex mx-auto items-center">
-      <i className="text-3xl text-zinc-400 ri-search-line"></i>
+      <i className="text-3xl text-zinc-400 ri-search-line ml-9"></i>
       <input
         type="text"
-        className="w-[50%] mx-9 p-5 px-2 text-xl outline-none border-none bg-transparent text-white"
+        className="w-[50%] mx-8 p-5 pl-3 px-2 text-xl outline-none border-none bg-transparent text-white"
         placeholder="search movies/tv shows"
         value={query}
         onChange={(e) => setQuery(e.target.value)}

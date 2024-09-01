@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Sidenav from "./partials/Sidenav";
-import Topnav from "./partials/Topnav";
 import axios from "../utils/axios";
-import Header from "./partials/Header";
-import HorizontalCards from "./partials/HorizontalCards";
-import Dropdown from "./partials/Dropdown";
 import Loading from "./Loading";
-import { LoginPopUp } from "./partials/Login/LoginPopUp";
 import { useDispatch, useSelector } from "react-redux";
-import { handleLoginPopUp } from "../store/reducers/userSlice";
+
+const HorizontalCards=React.lazy(()=>import("./partials/HorizontalCards"))
+const Dropdown=React.lazy(()=>import("./partials/Dropdown"))
+const Topnav=React.lazy(()=>import("./partials/Topnav"))
+const Header=React.lazy(()=>import("./partials/Header"))
+const LoginPopUp=React.lazy(()=>import("./partials/Login/LoginPopUp"))
+const handleLoginPopUp=React.lazy(()=>import("../store/reducers/userSlice"))
 
 const Home = () => {
   document.title = "Movie Book";
@@ -17,9 +18,6 @@ const Home = () => {
   const [category, setCategory] = useState("movie");
   const dispatch = useDispatch();
   const popup = useSelector((store) => store.user.popup);
-  // const handleLoginPopUp=()=>{
-  //     setpopup(false)
-  // }
 
   const [page, setPage] = useState(1);
   const set_page = () => {

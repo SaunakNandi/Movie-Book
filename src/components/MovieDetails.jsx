@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { asyncloadmovie, removemovie } from '../store/actions/movieActions'
-import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom'
 import HorizontalCards from './partials/HorizontalCards'
-import { Link } from 'react-router-dom'
-import Loading from './Loading'
+import Loading from './Loading'          
+import { useNavigate, useParams, useLocation, Link, Outlet } from 'react-router-dom'
 
 const MovieDetails = () => {
   const {pathname} =useLocation()

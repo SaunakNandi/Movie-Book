@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import no_image from '../../assets/no_image.png'
+
+const no_image=React.lazy(()=>import('../../assets/no_image.png'))
 const HorizontalCards = ({trend,category}) => {
     const uniqueObjects = {};
     // console.log(trend)

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Topnav from './partials/Topnav'
-import Dropdown from './partials/Dropdown'
-import axios from '../utils/axios'
+import React, { useEffect, useState, Suspense } from 'react'
 import Cards from './partials/Cards'
 import Loading from './Loading'
-import InfiniteScroll from 'react-infinite-scroll-component';
+import axios from '../utils/axios'
+import { useNavigate } from 'react-router-dom'
+
+const Topnav=React.lazy(()=>import('./partials/Topnav'))
+const Dropdown=React.lazy(()=>import('./partials/Dropdown'))
+const InfiniteScroll=React.lazy(()=>import('react-infinite-scroll-component'))
 
 const Movies = () => {
     const [category,setCategory]=useState("now_playing")
@@ -59,9 +60,15 @@ const Movies = () => {
                 Movies<span className='ml-2 text-zinc-400'>({category})</span>
             </h1>
             <div className="flex items-center w-[80%]">
-                <Topnav/>
-                <Dropdown title="Cartegory" options={["popular","top_rated","now_playing","upcoming"]} func={(e)=> setCategory(e.target.value)}/>
-                <Dropdown title="Sort by" options={["rating -(high - low)","rating -(low - high)"]} func={(e)=> setsortOption(e.target.value)}/>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Topnav/>
+                </Suspense>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Dropdown title="Cartegory" options={["popular","top_rated","now_playing","upcoming"]} func={(e)=> setCategory(e.target.value)}/>
+                </Suspense>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Dropdown title="Sort by" options={["rating -(high - low)","rating -(low - high)"]} func={(e)=> setsortOption(e.target.value)}/>
+                </Suspense>
             </div>
         </div>
         <InfiniteScroll dataLength={movies.length} next={GetMovies}

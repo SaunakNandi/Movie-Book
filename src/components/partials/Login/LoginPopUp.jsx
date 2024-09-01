@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import LoginSignUp from "./LoginSignUp";
-export function LoginPopUp({handleLoginPopUp}){
+export function LoginPopUp(){
     // window.addEventListener('click',(e)=>{
     //     if(e.target===popupWindow.current)
     //         handleLoginPopUp()        

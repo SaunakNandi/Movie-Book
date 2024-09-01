@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import left_arrow from '../assets/left_arrow.gif'
-import Topnav from './partials/Topnav'
-import Dropdown from './partials/Dropdown'
+import React, { useEffect, useState, Suspense } from 'react'
 import axios from '../utils/axios'
 import Cards from './partials/Cards'
 import Loading from './Loading'
-import InfiniteScroll from 'react-infinite-scroll-component';
+import { useNavigate } from 'react-router-dom'
+
+const InfiniteScroll=React.lazy(()=>import('react-infinite-scroll-component'))
+const Topnav=React.lazy(()=>import('./partials/Topnav'))
+const Dropdown=React.lazy(()=>import('./partials/Dropdown'))
 
 const TvShow = () => {
     const [category,setCategory]=useState("airing_today")
@@ -62,15 +62,19 @@ const TvShow = () => {
                 Tv<small className='ml-2 text-zinc-400'>({category})</small>
             </h1>
             <div className="flex items-center w-[80%]">
+            <Suspense fallback={<div></div>}>
                 <Topnav/>
                 <Dropdown title="Cartegory" options={["on_the_air","popular","top_rated","airing_today"]} func={(e)=> setCategory(e.target.value)}/>
+            </Suspense>
             </div>
         </div>
-        <InfiniteScroll dataLength={tv.length} next={GetTv}
-        hasMore={hasMore}
-        loader={<h1 className='w-screen bg-[#28283c]'>Loading</h1>}>
-            <Cards data={tv} title="tv"/>
-        </InfiniteScroll>
+        <Suspense fallback={<div></div>}>
+            <InfiniteScroll dataLength={tv.length} next={GetTv}
+            hasMore={hasMore}
+            loader={<h1 className='w-screen bg-[#28283c]'>Loading</h1>}>
+                <Cards data={tv} title="tv"/>
+            </InfiniteScroll>
+        </Suspense>
     </div>
   ):<Loading/>
 }

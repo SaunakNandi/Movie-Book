@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import no_image from '../../assets/no_image.png'
+
+const no_image=React.lazy(()=>import('../../assets/no_image.png'))
+
 const Cards = ({data,title,options}) => {
   console.log(options)
   const filteredData=data.filter(obj => obj.profile_path !== null);  // for people profile. Hopes its working

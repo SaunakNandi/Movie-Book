@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import axios from '../utils/axios'
-import { useLocation, useParams, useNavigate, Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import Loading from './Loading'
 import { useDispatch, useSelector } from 'react-redux'
-import { asyncloadseason, removeseason } from '../store/actions/seasonAction'
+import { asyncloadseason } from '../store/actions/seasonAction'
 import { Link } from 'react-router-dom'
-import no_image from '../assets/no_image.png'
+import { removeseason } from '../store/actions/seasonAction'
+import { useLocation, useParams, useNavigate } from 'react-router-dom'
+
+const no_image=React.lazy(()=>import('../assets/no_image.png'))
 
 const TvSeasons = () => {
     
     const {id}=useParams()
     const {pathname}=useLocation()
-
-    //console.log(useSelector(state=> state.season))
     const {info}=useSelector(state=> state.season)
     const navigate=useNavigate()
     const [show,setShow]=useState(true)

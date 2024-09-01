@@ -22,7 +22,6 @@ export const asyncloadtv=(id)=>async(dispatch,getState)=>{
             watchProviders:watchProviders.data.results.IN,
             casts:casts
         }
-        console.table("ultimatedetails ",ultimatedetails)  
         dispatch(loadtv(ultimatedetails))
     }
     catch(err)

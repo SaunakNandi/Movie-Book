@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { asyncloadperson, removeperson } from '../store/actions/personActions'
-import { useNavigate, useParams } from 'react-router-dom'
-import HorizontalCards from './partials/HorizontalCards'
+import { asyncloadperson } from '../store/actions/personActions'
 import { Link } from 'react-router-dom'
 import Loading from './Loading'
-import Dropdown from './partials/Dropdown'
+import { useNavigate, useParams } from 'react-router-dom'
+import { removeperson } from '../store/actions/personActions'
+
+const HorizontalCards=React.lazy(()=>import('./partials/HorizontalCards'))
+const Dropdown=React.lazy(()=>import('./partials/Dropdown'))
 
 const PersonDetails = () => {
   const navigate=useNavigate()
@@ -42,15 +44,23 @@ const PersonDetails = () => {
 
           {/* Social Media link */}
           <div className="text-2xl text-white flex gap-x-5">
-            <a target='_blank' href={`https://www.wikidata.org/wiki/${info.externalId.wikidata_id}`}>
-              <i className="ri-earth-fill"></i>
-            </a>
-            <a target='_blank' href={`https://www.instagram.com/${info.externalId.instagram_id}`}>
+            {
+              info.externalId.wikidata_id && ( 
+                  <a target='_blank' href={`https://www.wikidata.org/wiki/${info.externalId.wikidata_id}`}>
+                  <i className="ri-earth-fill"></i> 
+                  </a>
+              )
+            }
+           {
+              info.externalId.instagram_id && ( <a target='_blank' href={`https://www.instagram.com/${info.externalId.instagram_id}`}>
               <i className="ri-instagram-fill"></i>
-            </a>
-            <a target='_blank' href={`https://www.instagram.com/${info.externalId.twitter_id}`}>
-              <i className="ri-twitter-x-fill"></i>
-            </a>
+              </a> )
+            }
+            {
+              info.externalId.instagram_id && (<a target='_blank' href={`https://www.twitter.com/${info.externalId.twitter_id}`}>
+              <i className="ri-twitter-x-fill"></i> 
+              </a> )
+            }
           </div>
 
           {/* Personal Information */}
@@ -75,12 +85,16 @@ const PersonDetails = () => {
           <h1 className="text-xl text-zinc-400 mt-5 font-semibold">Biography</h1>
           <p className='text-zinc-400 mt-3'>{info.detail.biography}</p>
           <h1 className="text-xl text-zinc-400 font-semibold mt-5">Worked in</h1>
-          <HorizontalCards trend={info.combinedCredits.cast}/>
+          <Suspense fallback={<div></div>}>
+            <HorizontalCards trend={info.combinedCredits.cast}/>
 
-          <div className="flex w-full justify-between">
-            <h1 className="text-xl text-zinc-400 font-semibold mt-5">Acting</h1>
-            <Dropdown title="Category" options={["tv","movie"]} func={(e)=>setCategory(e.target.value)}/>
-          </div>
+            <div className="flex w-full justify-between">
+              <h1 className="text-xl text-zinc-400 font-semibold mt-5">Acting</h1>
+              <Suspense fallback={<div></div>}>
+                <Dropdown title="Category" options={["tv","movie"]} func={(e)=>setCategory(e.target.value)}/>
+              </Suspense>
+            </div>
+          </Suspense>
 
           <div className="w-full h-[50vh] overflow-x-hidden overflow-y-auto shadow-xl mt-5 shadow-[rgba(255,255,255,.3)] border-2 border-zinc-700 p-5 text-zinc-400 list-disc">
             {

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import { useNavigate } from 'react-router-dom'
-import left_arrow from '../assets/left_arrow.gif'
-import Topnav from './partials/Topnav'
-import Dropdown from './partials/Dropdown'
 import axios from '../utils/axios'
 import Cards from './partials/Cards'
 import Loading from './Loading'
-import InfiniteScroll from 'react-infinite-scroll-component';
+
+const Topnav=React.lazy(()=>import('./partials/Topnav'))
+const Dropdown=React.lazy(()=>import('./partials/Dropdown'))
+const InfiniteScroll=React.lazy(()=>import('react-infinite-scroll-component'))
 
 const Trending = () => {
     const [category,setCategory]=useState("all")
@@ -69,17 +69,21 @@ const Trending = () => {
                 Trending
             </h1>
             <div className="flex items-center w-[80%]">
-                <Topnav/>
-                <Dropdown title="Cartegory" options={["movie","tv","all"]} func={(e)=> setCategory(e.target.value)}/>
-                <div className="w-[2%]"></div>
-                <Dropdown title="Duration" options={["week","day"]} func={(e)=> setDuration(e.target.value)}/>
+                <Suspense fallback={<div></div>}>
+                    <Topnav/>
+                    <Dropdown title="Cartegory" options={["movie","tv","all"]} func={(e)=> setCategory(e.target.value)}/>
+                    <div className="w-[2%]"></div>
+                    <Dropdown title="Duration" options={["week","day"]} func={(e)=> setDuration(e.target.value)}/>
+                </Suspense>
             </div>
         </div>
-        <InfiniteScroll dataLength={trending.length} next={GetTrending}
-        hasMore={hasMore}
-        loader={<h1 className='w-screen bg-[#28283c]'>Loading</h1>}>
-            <Cards data={trending} title={category}/>
-        </InfiniteScroll>
+        <Suspense fallback={<div></div>}>
+            <InfiniteScroll dataLength={trending.length} next={GetTrending}
+            hasMore={hasMore}
+            loader={<h1 className='w-screen bg-[#28283c]'></h1>}>
+                <Cards data={trending} title={category}/>
+            </InfiniteScroll>
+        </Suspense>
     </div>
   ):<Loading/>
 }
