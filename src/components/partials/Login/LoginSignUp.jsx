@@ -1,17 +1,15 @@
-import React, { useRef, useState, Suspense } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { auth } from "../../../utils/firebase";
 import {
   GoogleLogin,
   handleButtonClick,
 } from "../../../utils/handleButtonClick";
 import { handleLoginPopUp } from "../../../store/reducers/userSlice";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
-// const auth=React.lazy(()=>import('../../../utils/firebase'))
-// const FaEye=React.lazy(()=>import('react-icons/fa'))
-// const FaEyeSlash=React.lazy(()=>import('react-icons/fa'))
-// const FcGoogle=React.lazy(()=>import('react-icons/fc'))
+
+const auth=React.lazy(()=>import('../../../utils/firebase'))
+const FaEye=React.lazy(()=>import('react-icons/fa'))
+const FaEyeSlash=React.lazy(()=>import('react-icons/fa'))
+const FcGoogle=React.lazy(()=>import('react-icons/fc'))
 
 const LoginSignUp = () => {
   const name = useRef(null);
@@ -107,19 +105,15 @@ const LoginSignUp = () => {
           />
           <span className="relative">
             {ShowPassword ? (
-              // <Suspense fallback={<div></div>}>
-              // </Suspense>
-                <FaEye
-                  className={passWordHiddenClass}
-                  onClick={() => setShowPassword(!ShowPassword)}
-                />
+              <FaEye
+                className={passWordHiddenClass}
+                onClick={() => setShowPassword(!ShowPassword)}
+              />
             ) : (
-              // <Suspense fallback={<div></div>}>\
-              // </Suspense>
-                <FaEyeSlash
-                  className={passWordHiddenClass}
-                  onClick={() => setShowPassword(!ShowPassword)}
-                />
+              <FaEyeSlash
+                className={passWordHiddenClass}
+                onClick={() => setShowPassword(!ShowPassword)}
+              />
             )}
           </span>
           {errorMessage.password && (
@@ -142,9 +136,7 @@ const LoginSignUp = () => {
               className=" w-9 h-9 rounded-full flex items-center justify-center shadow-custom-inset hover:scale-110 transition-all duration-300"
               onClick={PlatformLogin}
             >
-              {/* <Suspense fallback={<div></div>}>
-              </Suspense> */}
-                <FcGoogle className="text-3xl" />
+              <FcGoogle className="text-3xl" />
             </div>
           </div>
         </div>

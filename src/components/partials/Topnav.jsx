@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "../../utils/axios";
-import debounce from 'lodash.debounce';
 
 const no_image=React.lazy(()=>import("../../assets/no_image.png"))
 
 const Topnav = () => {
   const [query, setQuery] = useState("");
   const [searches, setSearches] = useState(null);
-  const GetSearches = async (searchTerm) => {
+  const GetSearches = async () => {
     try {
-      // console.log(searchTerm)
-      const { data } = await axios.get(`/search/multi?query=${searchTerm}`);
+      const { data } = await axios.get(`/search/multi?query=${query}`);
       //   console.log(data.results)
       setSearches(data.results);
     } catch (err) {
@@ -19,25 +17,8 @@ const Topnav = () => {
     }
   };
 
-  const debouncing=useCallback(
-    debounce(
-      async(searchTerm)=>{
-        await GetSearches(searchTerm);
-        // try {
-        //   const { data } = await axios.get(`/search/multi?query=${query}`);
-        //   //   console.log(data.results)
-        //   setSearches(data.results);
-        // } catch (err) {
-        //   console.log(err);
-        // }
-      },200),
-      []
-  )
-
   useEffect(() => {
-    // GetSearches();
-    console.log(query)
-    debouncing(query)
+    GetSearches();
   }, [query]);
   return (
     <div className="w-[80%] h-[10vh] relative flex mx-auto items-center">

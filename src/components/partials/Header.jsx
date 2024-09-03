@@ -2,10 +2,11 @@ import React, { useEffect,useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Style.css'
 
-const Header = ({wallpaper}) => {
+const Header = ({wallpaper,set_page}) => {
     
-    const [activeindex,setActiveIndex]=useState(0)
+    const [activeindex,setActiveIndex]=useState(1)
     const [transitionClass, setTransitionClass] = useState('');
+    // console.log(wallpaper)
     
     // Using setTimeout for setTransitionClass in the slide transition functions is necessary to ensure that the browser has enough time to apply the initial class before changing it. This approach ensures that the CSS transition actually takes place. Without the setTimeout, the state changes can happen too quickly for the browser to render the transition smoothly.
 
@@ -17,16 +18,12 @@ const Header = ({wallpaper}) => {
         }, 500);
       };
     const Slide_Right=()=>{
-        // console.log(activeindex,wallpaper.length)
-        // if((activeindex+1)===(wallpaper.length-1)){
-        //     console.log(activeindex+1)
-        //     setActiveIndex(0)
-            // Slide_Right()
-        //     return
-        // }
+
+        if(activeindex+1==wallpaper.length-1) set_page()
+            
         setTransitionClass('carousel-exit-right');
         setTimeout(() => {
-            setActiveIndex((activeindex+1) % (wallpaper.length))
+            setActiveIndex((activeindex+1) % wallpaper.length)
             setTransitionClass('carousel-enter-right');
         }, 500);
     }
@@ -70,7 +67,7 @@ const Header = ({wallpaper}) => {
                         to={`/${w.media_type}/details/${w.id}/trailer`}>Watch Trailer</Link>
                         </div>
                         <div className='mr-[33vw]'>
-                            <i className={`text-4xl mr-3 ri-arrow-left-circle-line cursor-pointer`}
+                            <i className={`text-4xl mr-3 ri-arrow-left-circle-line cursor-pointer ${i === 0 ? 'hidden' : ''}`}
                             onClick={Slide_Left}></i>
                             <i className="text-4xl ri-arrow-right-circle-line cursor-pointer" onClick={Slide_Right}></i>
                         </div>
