@@ -1,4 +1,5 @@
 import { validateUserCredentials } from "./validation";
+import { handleLoginPopUp } from "../store/reducers/userSlice";
 import {
   createUserWithEmailAndPassword,
   updateProfile,
@@ -7,7 +8,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 
-const handleLoginPopUp=React.lazy(()=> import("../store/reducers/userSlice"))
+// const handleLoginPopUp=React.lazy(()=> import("../store/reducers/userSlice"))
 
 export const handleButtonClick = ({
   auth,
