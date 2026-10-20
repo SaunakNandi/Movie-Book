@@ -1,6 +1,6 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { loadmovie } from "../reducers/movieSlice";
-import axios from "axios";
+import axios from "../../utils/axios";
 import { fetchMovieRequest } from "../actions/movie-actions";
 
 function* fetchMovieWorker(action) {
@@ -24,7 +24,8 @@ function* fetchMovieWorker(action) {
       call(axios.get, `/movie/${id}/credits`),
     ]);
 
-    const casts = credits.data.cast
+    const casts = (credits?.data?.cast ?? [])
+      .filter((item) => typeof item.popularity != "undefined")
       .sort((a, b) => b.popularity - a.popularity)
       .slice(0, 16);
     let ultimatedetails = {
@@ -32,8 +33,8 @@ function* fetchMovieWorker(action) {
       externalId: externalId.data,
       recommendations: recommendations.data.results,
       similar: similar.data.results,
-      videos: videos.data.results.find((m) => m.type === "Trailer"),
-      watchProviders: watchProviders.data.results.IN,
+      videos: videos.data?.results?.find((m) => m.Type && m.type === "Trailer"),
+      watchProviders: watchProviders?.data?.results?.IN || null,
       casts: casts,
     };
 

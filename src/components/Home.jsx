@@ -3,13 +3,14 @@ import Sidenav from "./partials/Sidenav";
 import axios from "../utils/axios";
 import Loading from "./Loading";
 import { useDispatch, useSelector } from "react-redux";
+import { handleLoginPopUp } from "../store/reducers/userSlice";
 
-const HorizontalCards=React.lazy(()=>import("./partials/HorizontalCards"))
-const Dropdown=React.lazy(()=>import("./partials/Dropdown"))
-const Topnav=React.lazy(()=>import("./partials/Topnav"))
-const Header=React.lazy(()=>import("./partials/Header"))
-const LoginPopUp=React.lazy(()=>import("./partials/Login/LoginPopUp"))
-const handleLoginPopUp=React.lazy(()=>import("../store/reducers/userSlice"))
+const HorizontalCards = React.lazy(() => import("./partials/HorizontalCards"));
+const Dropdown = React.lazy(() => import("./partials/Dropdown"));
+const Topnav = React.lazy(() => import("./partials/Topnav"));
+const Header = React.lazy(() => import("./partials/Header"));
+const LoginPopUp = React.lazy(() => import("./partials/Login/LoginPopUp"));
+// const handleLoginPopUp=React.lazy(()=>import("../store/reducers/userSlice"))
 
 const Home = () => {
   document.title = "Movie Book";
@@ -53,12 +54,11 @@ const Home = () => {
     const cookies = decodedCookie.split(";");
     // console.log(cookies);
     for (let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i].trim();
-        if (cookie.indexOf(token) === 0) {
-          return cookie.substring(token.length, cookie.length);
-        }
+      let cookie = cookies[i].trim();
+      if (cookie.indexOf(token) === 0) {
+        return cookie.substring(token.length, cookie.length);
       }
-
+    }
   };
   useEffect(() => {
     GetTrending();
@@ -67,8 +67,6 @@ const Home = () => {
     GetHeaderWallpaper();
   }, [page]);
   useEffect(() => {
-    // const authToken=Cookies.get('authToken');
-
     const authToken = getTokenValue("authToken");
     // console.log(authToken);
     if (!authToken && !popup) {
@@ -80,7 +78,7 @@ const Home = () => {
   return wallpaper && trending ? (
     <>
       <Sidenav />
-      {popup && <LoginPopUp/>}
+      {popup && <LoginPopUp />}
       <div className="w-[80%] overflow-auto overflow-x-hidden">
         <Topnav />
         <Header wallpaper={wallpaper} set_page={set_page} />

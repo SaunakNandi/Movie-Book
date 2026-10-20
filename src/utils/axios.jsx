@@ -6,7 +6,7 @@ const instance = axios.create({
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NjdmNmU4MDY1YzdkNGNkYmMwYmFkNmI1ZmZhYzA1NiIsInN1YiI6IjY2M2NmZTJlZDEzYTMzNDFjZTc4YWNlYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.LepURE6FMKJSN7RBAk6AhKBgsTFAV5q71FQz2rJ-klo",
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NTJmNDc4ZmIwNTkzZGUwYTM1ODhkOTYxODg4OGUwYyIsIm5iZiI6MTYzNTkxODk5OS43NTksInN1YiI6IjYxODIyNDk3ZTU0ZDVkMDAyYzk4YWQwNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7le2xsjKzBuxic8Ni7T7bPFhQNuCk_KbO4tJL2pVIJc",
   },
 });
 export default instance;

@@ -1,3 +1,4 @@
+import React from "react";
 import { validateUserCredentials } from "./validation";
 import {
   createUserWithEmailAndPassword,
@@ -7,7 +8,9 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 
-const handleLoginPopUp=React.lazy(()=> import("../store/reducers/userSlice"))
+const handleLoginPopUp = React.lazy(
+  () => import("../store/reducers/userSlice"),
+);
 
 export const handleButtonClick = ({
   auth,
@@ -23,7 +26,7 @@ export const handleButtonClick = ({
 
   const result = validateUserCredentials(
     email.current.value,
-    password.current.value
+    password.current.value,
   );
   if (result) {
     email.current.value = "";
@@ -35,7 +38,7 @@ export const handleButtonClick = ({
     createUserWithEmailAndPassword(
       auth,
       email.current.value,
-      password.current.value
+      password.current.value,
     )
       .then((userCredential) => {
         // Signed up
@@ -67,7 +70,7 @@ export const handleButtonClick = ({
     signInWithEmailAndPassword(
       auth,
       email.current.value,
-      password.current.value
+      password.current.value,
     )
       .then((userCredential) => {
         // Signed in
@@ -105,12 +108,12 @@ export const GoogleLogin = ({ auth, dispatch }) => {
     })
     .catch((error) => {
       // Handle Errors here.
-      const errorCode = error.code;
+      // const errorCode = error.code;
       const errorMessage = error.message;
       // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
+      // const email = error.customData.email;
+      // // The AuthCredential type that was used.
+      // const credential = GoogleAuthProvider.credentialFromError(error);
       console.log(errorMessage);
       // ...
     });

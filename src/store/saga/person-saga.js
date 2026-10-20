@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../utils/axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { loadperson } from "../reducers/personSlice";
 import { fetchActorDetails } from "../actions/person-actions";
