@@ -1,10 +1,11 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { loadmovie } from "../reducers/movieSlice";
 import axios from "../../utils/axios";
-import { fetchMovieRequest } from "../actions/movie-actions";
+import { movie_fetcher } from "../actions/movie-actions";
 
 function* fetchMovieWorker(action) {
   const id = action.payload;
+  console.log("action.payload value ", action.payload);
   try {
     const [
       detail,
@@ -45,5 +46,5 @@ function* fetchMovieWorker(action) {
 }
 
 export function* watchMovieSaga() {
-  yield takeLatest(fetchMovieRequest, fetchMovieWorker);
+  yield takeLatest(movie_fetcher, fetchMovieWorker);
 }

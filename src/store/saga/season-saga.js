@@ -1,7 +1,7 @@
 import axios from "../../utils/axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { loadseason } from "../reducers/seasonsSlice";
-import { fetchSeasonDetails } from "../actions/season-action";
+import { fetch_season_endpoint } from "../actions/season-action";
 
 function* SeasonWorker(action) {
   const { series_id, season_no } = action.payload;
@@ -25,5 +25,5 @@ function* SeasonWorker(action) {
 }
 
 export function* watchSeasonSaga() {
-  yield takeLatest(fetchSeasonDetails, SeasonWorker);
+  yield takeLatest(fetch_season_endpoint, SeasonWorker);
 }

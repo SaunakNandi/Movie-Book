@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Loading from "./Loading";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,8 +6,7 @@ import { fetchSeasonDetails } from "../store/actions/season-action";
 import { Link } from "react-router-dom";
 import { removeseason } from "../store/reducers/seasonsSlice";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
-
-const no_image = React.lazy(() => import("../assets/no_image.png"));
+import no_image from "../assets/no_image.png";
 
 const TvSeasons = () => {
   const { id } = useParams();

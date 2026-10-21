@@ -1,7 +1,7 @@
 import axios from "../../utils/axios";
 import { call, takeLatest, all, put } from "redux-saga/effects";
 import { loadtv } from "../reducers/tvSlice";
-import { fetchTVDetails } from "../actions/tv-actions";
+import { tv_fetch } from "../actions/tv-actions";
 
 function* fetchTvWorker(action) {
   const id = action.payload;
@@ -43,5 +43,5 @@ function* fetchTvWorker(action) {
 }
 
 export function* watchtvSaga() {
-  yield takeLatest(fetchTVDetails, fetchTvWorker);
+  yield takeLatest(tv_fetch, fetchTvWorker);
 }

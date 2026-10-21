@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../utils/axios";
 import Cards from "./partials/Cards";
 import Loading from "./Loading";
 
-const InfiniteScroll=React.lazy(()=>import('react-infinite-scroll-component'))
-const Topnav=React.lazy(()=>import('./partials/Topnav'))
+const InfiniteScroll = React.lazy(
+  () => import("react-infinite-scroll-component"),
+);
+const Topnav = React.lazy(() => import("./partials/Topnav"));
 
 const People = () => {
   const [people, setPeople] = useState([]);
@@ -50,21 +52,21 @@ const People = () => {
           Stars
         </h1>
         <div className="flex items-center w-[80%]">
-            <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div>Loading...</div>}>
             <Topnav />
-            </Suspense>
+          </Suspense>
         </div>
       </div>
-        <Suspense fallback={<div>Loading...</div>}>
-            <InfiniteScroll
-                dataLength={people.length}
-                next={GetPeople}
-                hasMore={hasMore}
-                loader={<h1 className="w-screen bg-[#28283c]">Loading</h1>}
-            >
-                <Cards data={people} title="person" />
-            </InfiniteScroll>
-        </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        <InfiniteScroll
+          dataLength={people.length}
+          next={GetPeople}
+          hasMore={hasMore}
+          loader={<h1 className="w-screen bg-[#28283c]">Loading</h1>}
+        >
+          <Cards data={people} title="person" />
+        </InfiniteScroll>
+      </Suspense>
     </div>
   ) : (
     <Loading />

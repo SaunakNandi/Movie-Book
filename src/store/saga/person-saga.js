@@ -1,7 +1,7 @@
 import axios from "../../utils/axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { loadperson } from "../reducers/personSlice";
-import { fetchActorDetails } from "../actions/person-actions";
+import { person_fetch } from "../actions/person-actions";
 
 function* personWorker(action) {
   const id = action.payload;
@@ -28,5 +28,5 @@ function* personWorker(action) {
 }
 
 export function* watchPersonSaga() {
-  yield takeLatest(fetchActorDetails, personWorker);
+  yield takeLatest(person_fetch, personWorker);
 }

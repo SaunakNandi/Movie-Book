@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   GoogleLogin,
@@ -6,10 +6,9 @@ import {
 } from "../../../utils/handleButtonClick";
 import { handleLoginPopUp } from "../../../store/reducers/userSlice";
 
-const auth=React.lazy(()=>import('../../../utils/firebase'))
-const FaEye=React.lazy(()=>import('react-icons/fa'))
-const FaEyeSlash=React.lazy(()=>import('react-icons/fa'))
-const FcGoogle=React.lazy(()=>import('react-icons/fc'))
+import { auth } from "../../../utils/firebase"; // (Use import { auth } if you exported it as a const in your firebase file!)
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 const LoginSignUp = () => {
   const name = useRef(null);

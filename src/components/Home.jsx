@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Sidenav from "./partials/Sidenav";
 import axios from "../utils/axios";
 import Loading from "./Loading";
@@ -78,20 +78,23 @@ const Home = () => {
   return wallpaper && trending ? (
     <>
       <Sidenav />
-      {popup && <LoginPopUp />}
-      <div className="w-[80%] overflow-auto overflow-x-hidden">
-        <Topnav />
-        <Header wallpaper={wallpaper} set_page={set_page} />
-        <div className="flex justify-between p-5">
-          <h1 className="text-3xl font-semibold text-zinc-400">Trending</h1>
-          <Dropdown
-            title="Filter"
-            options={["tv", "movie", "all"]}
-            func={(e) => setCategory(e.target.value)}
-          />
+      {/* 👇 Wrap your lazy components in Suspense with a Loading fallback */}
+      <Suspense fallback={<Loading />}>
+        {popup && <LoginPopUp />}
+        <div className="w-[80%] overflow-auto overflow-x-hidden">
+          <Topnav />
+          <Header wallpaper={wallpaper} set_page={set_page} />
+          <div className="flex justify-between p-5">
+            <h1 className="text-3xl font-semibold text-zinc-400">Trending</h1>
+            <Dropdown
+              title="Filter"
+              options={["tv", "movie", "all"]}
+              func={(e) => setCategory(e.target.value)}
+            />
+          </div>
+          <HorizontalCards trend={trending} />
         </div>
-        <HorizontalCards trend={trending} />
-      </div>
+      </Suspense>
     </>
   ) : (
     <Loading />

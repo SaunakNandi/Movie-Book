@@ -112,14 +112,14 @@ const PersonDetails = () => {
           <h1 className="text-xl text-zinc-400 font-semibold mt-5">
             Worked in
           </h1>
-          <Suspense fallback={<div></div>}>
+          <Suspense fallback={<div>Loading Cards...</div>}>
             <HorizontalCards trend={info.combinedCredits.cast} />
 
             <div className="flex w-full justify-between">
               <h1 className="text-xl text-zinc-400 font-semibold mt-5">
                 Acting
               </h1>
-              <Suspense fallback={<div></div>}>
+              <Suspense fallback={<div>Loading Dropdown...</div>}>
                 <Dropdown
                   title="Category"
                   options={["tv", "movie"]}

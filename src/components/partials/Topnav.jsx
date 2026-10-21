@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "../../utils/axios";
-
-const no_image=React.lazy(()=>import("../../assets/no_image.png"))
+import no_image from "../../assets/no_image.png";
 
 const Topnav = () => {
   const [query, setQuery] = useState("");
@@ -10,7 +9,6 @@ const Topnav = () => {
   const GetSearches = async () => {
     try {
       const { data } = await axios.get(`/search/multi?query=${query}`);
-      //   console.log(data.results)
       setSearches(data.results);
     } catch (err) {
       console.log(err);
@@ -40,7 +38,8 @@ const Topnav = () => {
       <div className="z-[99] absolute bg-zinc-200 w-[50%] max-h-[50vh] top-[90%] left-[5%] overflow-auto rounded">
         {searches &&
           searches.map((x, i) => (
-            <Link to={`/${x.media_type}/details/${x.id}`}
+            <Link
+              to={`/${x.media_type}/details/${x.id}`}
               key={i}
               className="text-zinc-700 font-semibold w-[100%] p-5 flex justify-start items-center border-b-2 border-zinc-100 hover:text-black hover:bg-zinc-300 duration-300 shadow-lg"
             >
