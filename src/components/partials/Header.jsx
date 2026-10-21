@@ -30,7 +30,6 @@ const Header = ({ wallpaper, set_page }) => {
 
   // GetWallpaper();
   useEffect(() => {
-    // console.log("called")
     const intervalId = setInterval(() => {
       Slide_Right();
     }, 5000);
@@ -39,69 +38,74 @@ const Header = ({ wallpaper, set_page }) => {
     };
   }, [activeindex]);
 
+  const activeWallpaper = wallpaper[activeindex];
   return (
-    wallpaper &&
-    wallpaper.map((w, i) => (
-      <div
-        key={i}
-        className={`carousel-slide ${activeindex === i ? transitionClass : "hidden"}`}
-      >
+    <>
+      <div className="wrapper relative">
         <div
-          style={{
-            background: `linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.3),rgba(0,0,0,.8)),url(https://image.tmdb.org/t/p/original/${w.backdrop_path})`,
-            backgroundPosition: `top`,
-            backgroundSize: `cover`,
-          }}
-          className="w-full h-[60vh] flex flex-col justify-end pb-[2%] pl-[5%] text-white items-start"
+          key={activeWallpaper.id}
+          className={`carousel-slide ${transitionClass}`}
         >
-          <h1 className="text-4xl font-black">
-            {w.original_title || w.title || w.original_name || w.name}
-          </h1>
-          <p className="w-[50%] mt-3">
-            {w.overview.slice(0, 150)}...
-            <Link
-              className="text-blue-400"
-              to={`/${w.media_type}/details/${w.id}`}
-            >
-              {" "}
-              more
-            </Link>
-          </p>
-          <p className="mt-5">
-            {w.release_date ? (
-              <span>
-                <i className="mr-2 ri-megaphone-fill"></i>
-                {w.release_date}
-              </span>
-            ) : (
-              <span></span>
-            )}
-            <i className="text-yellow-500 ml-4 mr-2 ri-album-fill"></i>
-            {w.media_type.toUpperCase()}
-          </p>
-          <div className="flex items-center mt-10 gap-10 justify-between w-full">
-            <div>
+          <div
+            style={{
+              background: `linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.3),rgba(0,0,0,.8)),url(https://image.tmdb.org/t/p/original/${activeWallpaper.backdrop_path})`,
+              backgroundPosition: `top`,
+              backgroundSize: `cover`,
+            }}
+            className="w-full h-[60vh] flex flex-col justify-end pb-[2%] pl-[5%] text-white items-start"
+          >
+            <h1 className="text-4xl font-black">
+              {activeWallpaper.original_title ||
+                activeWallpaper.title ||
+                activeWallpaper.original_name ||
+                activeWallpaper.name}
+            </h1>
+            <p className="w-[50%] mt-3">
+              {activeWallpaper.overview.slice(0, 150)}...
               <Link
-                className="p-3 bg-[#6556CD] rounded-lg font-semibold"
-                to={`/${w.media_type}/details/${w.id}/trailer`}
+                className="text-blue-400"
+                to={`/${activeWallpaper.media_type}/details/${activeWallpaper.id}`}
               >
-                Watch Trailer
+                {" "}
+                more
               </Link>
-            </div>
-            <div className="mr-[33vw]">
-              <i
-                className={`text-4xl mr-3 ri-arrow-left-circle-line cursor-pointer ${i === 0 ? "hidden" : ""}`}
-                onClick={Slide_Left}
-              ></i>
-              <i
-                className="text-4xl ri-arrow-right-circle-line cursor-pointer"
-                onClick={Slide_Right}
-              ></i>
+            </p>
+            <p className="mt-5">
+              {activeWallpaper.release_date ? (
+                <span>
+                  <i className="mr-2 ri-megaphone-fill"></i>
+                  {activeWallpaper.release_date}
+                </span>
+              ) : (
+                <span></span>
+              )}
+              <i className="text-yellow-500 ml-4 mr-2 ri-album-fill"></i>
+              {activeWallpaper.media_type.toUpperCase()}
+            </p>
+            <div className="flex items-center mt-10 gap-10 justify-between w-full">
+              <div>
+                <Link
+                  className="p-3 bg-[#6556CD] rounded-lg font-semibold"
+                  to={`/${activeWallpaper.media_type}/details/${activeWallpaper.id}/trailer`}
+                >
+                  Watch Trailer
+                </Link>
+              </div>
             </div>
           </div>
         </div>
+        <div className="w-full flex items-center justify-center absolute bottom-1">
+          <i
+            className={`text-4xl mr-3 ri-arrow-left-circle-line cursor-pointer text-green-300`}
+            onClick={Slide_Left}
+          />
+          <i
+            className="text-4xl ri-arrow-right-circle-line cursor-pointer text-green-300"
+            onClick={Slide_Right}
+          />
+        </div>
       </div>
-    ))
+    </>
   );
 };
 

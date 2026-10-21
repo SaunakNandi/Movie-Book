@@ -23,7 +23,7 @@ const LoginSignUp = () => {
     password: "",
   });
   const errorClass = `text-lg text-red-700 tracking-wide`;
-  const passWordHiddenClass = `absolute cursor-pointer text-white right-0 top-[50%]
+  const passWordHiddenClass = `cursor-pointer text-white right-0 top-[50%]
                 translate-x-[-50%] translate-y-[-50%]`;
 
   const dispatch = useDispatch();
@@ -95,14 +95,14 @@ const LoginSignUp = () => {
         {errorMessage.email && (
           <p className={errorClass}>{errorMessage.email}</p>
         )}
-        <div className="relative">
+        <div className="relative flex">
           <input
             type={ShowPassword ? "text" : "password"}
             placeholder="Enter Password"
             ref={password}
             className="p-2 m-2 bg-black bg-opacity-10 text-white w-[100%] ml-0"
           />
-          <span className="relative">
+          <span className="absolute right-[2%] top-1/2">
             {ShowPassword ? (
               <FaEye
                 className={passWordHiddenClass}

@@ -6,17 +6,23 @@ import no_image from "../../assets/no_image.png";
 const Topnav = () => {
   const [query, setQuery] = useState("");
   const [searches, setSearches] = useState(null);
-  const GetSearches = async () => {
-    try {
-      const { data } = await axios.get(`/search/multi?query=${query}`);
-      setSearches(data.results);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
-    GetSearches();
+    // If the query is empty, clear the searches and don't make an API call!
+    if (query.trim() === "") {
+      setSearches(null);
+      return;
+    }
+
+    const timeId = setTimeout(async () => {
+      try {
+        const { data } = await axios.get(`/search/multi?query=${query}`);
+        setSearches(data.results);
+      } catch (error) {
+        console.error("Search failed:", error);
+      }
+    }, 400);
+
+    return () => clearTimeout(timeId);
   }, [query]);
   return (
     <div className="w-[80%] h-[10vh] relative flex mx-auto items-center">
@@ -30,7 +36,7 @@ const Topnav = () => {
       />
       {query.length > 0 && (
         <i
-          onClick={(e) => setQuery("")}
+          onClick={() => setQuery("")}
           className="text-zinc-400 text-3xl ri-close-fill"
         ></i>
       )}
